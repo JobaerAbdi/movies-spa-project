@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CartCalculate = ({watchTime}) => {
     const [time,setTime] = useState(watchTime);
@@ -20,18 +21,31 @@ const CartCalculate = ({watchTime}) => {
         setBreakTimee(breakTime)
     }
 
-   const handleBreakTime20 = (breakTime20)=>{
+    const handleBreakTime20 = (breakTime20)=>{
         localStorage.setItem('break-time20', breakTime20);
         setBreakTimee(breakTime20)
     }
 
-   const handleBreakTime25 = (breakTime25)=>{
+    const handleBreakTime25 = (breakTime25)=>{
         localStorage.setItem('break-time25', breakTime25);
         setBreakTimee(breakTime25)
     }
 
+    const handleCompleteTime = ()=>{
+        toast.success('🦄 Wow Total Break Time : 60 Minute',{
+            position: "top-center",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
+
     return (
-            <div className='px-5 mt-3'>
+            <div className='px-5 mt-3 sticky top-4'>
                 <h1 className='font-bold text-2xl'>Total Watch Time:</h1>
                 <input type="text" value={time} placeholder="Watch Time" className="input w-full max-w-xs mt-3" />  
                 <div>
@@ -44,7 +58,7 @@ const CartCalculate = ({watchTime}) => {
                     </div>
                 </div>  
                 <div className='mt-12'>
-                    <button className="btn btn-warning w-full mx-auto mb-3">Complete</button>
+                    <button onClick={handleCompleteTime} className="btn btn-warning w-full mx-auto mb-3">Complete</button>
                 </div>    
             </div>
     );
